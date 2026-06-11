@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B-FIX – Menú</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream:  #F3F0E8;
+    --green:  #4A5E2F;
+    --green2: #3A4A22;
+    --gold:   #C8953A;
+    --soft:   #D8D2C0;
+    --muted:  #7A7560;
+    --white:  #FDFCF8;
+    --fit-bg: #EDF3E6;
+    --fit-border: #B5C99A;
+  }
+
+  body {
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  .card {
+    background: var(--white);
+    max-width: 390px;
+    width: 100%;
+    border: 1.5px solid var(--soft);
+    padding: 2.4rem 1.8rem 2rem;
+    position: relative;
+    box-shadow: 0 6px 40px rgba(74,94,47,.09);
+  }
+
+  .card::before, .card::after, .c-bl, .c-br {
+    content: '';
+    position: absolute;
+    width: 16px; height: 16px;
+    border-color: var(--green);
+    border-style: solid;
+  }
+  .card::before { top:7px; left:7px;   border-width: 2px 0 0 2px; }
+  .card::after  { top:7px; right:7px;  border-width: 2px 2px 0 0; }
+  .c-bl { bottom:7px; left:7px;  border-width: 0 0 2px 2px; }
+  .c-br { bottom:7px; right:7px; border-width: 0 2px 2px 0; }
+
+  /* ── LOGO ── */
+  .logo-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.4rem;
+  }
+  .logo-circle {
+    position: relative;
+    width: 150px;
+    height: 150px;
+  }
+  .logo-circle svg.ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .logo-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-bfix {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 2.4rem;
+    color: var(--green);
+    letter-spacing: .02em;
+    line-height: 1;
+  }
+  .logo-sub {
+    font-size: .5rem;
+    font-weight: 500;
+    color: var(--green);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.5;
+    margin-top: 3px;
+  }
+
+  /* ── Divisor ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    margin: 0 0 1.2rem;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--soft);
+  }
+  .divider span { color: var(--gold); font-size: .9rem; }
+
+  .eyebrow {
+    text-align: center;
+    font-size: .63rem;
+    font-weight: 500;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.4rem;
+  }
+
+  /* ── ITEM CARD ── */
+  .item-box {
+    border: 1.5px solid var(--soft);
+    border-radius: 6px;
+    padding: 1.3rem 1.2rem 1.1rem;
+    margin-bottom: .9rem;
+    position: relative;
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .item-box:last-of-type { margin-bottom: 0; }
+
+  /* cintilla lateral */
+  .ribbon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background: var(--gold);
+    border-radius: 6px 0 0 6px;
+  }
+  .ribbon.fit { background: var(--green); }
+
+  .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-left: .9rem;
+    margin-bottom: .45rem;
+  }
+
+  .item-title-group { flex: 1; }
+
+  .item-tag {
+    font-size: .58rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: .15rem;
+    display: block;
+  }
+  .item-tag.fit { color: var(--green); }
+
+  .item-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--green2);
+    line-height: 1.1;
+  }
+
+  .item-price {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .item-price .peso {
+    font-size: 1rem;
+    font-weight: 500;
+    vertical-align: super;
+    line-height: 1;
+  }
+
+  .item-desc {
+    font-size: .76rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-left: .9rem;
+    margin-bottom: .7rem;
+  }
+
+  .ingredients {
+    display: flex;
+    gap: .4rem;
+    flex-wrap: wrap;
+    margin-left: .9rem;
+  }
+  .ing {
+    background: var(--white);
+    border: 1px solid var(--soft);
+    border-radius: 20px;
+    font-size: .68rem;
+    font-weight: 400;
+    color: var(--muted);
+    padding: .2rem .6rem;
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+  }
+
+  /* ── FIT ITEM ── */
+  .item-box.fit-card {
+    background: var(--fit-bg);
+    border-color: var(--fit-border);
+  }
+  .item-box.fit-card .item-price { color: var(--green); }
+
+  /* ── FRUIT SELECTOR ── */
+  .fruit-label {
+    font-size: .62rem;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-left: .9rem;
+    margin-bottom: .45rem;
+    display: block;
+  }
+  .fruits {
+    display: flex;
+    gap: .4rem;
+    flex-wrap: wrap;
+    margin-left: .9rem;
+    margin-bottom: .5rem;
+  }
+  .fruit-btn {
+    background: var(--white);
+    border: 1.5px solid var(--soft);
+    border-radius: 20px;
+    font-size: .68rem;
+    font-weight: 400;
+    color: var(--muted);
+    padding: .22rem .65rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    transition: all .15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .fruit-btn:hover { border-color: var(--green); color: var(--green2); }
+  .fruit-btn.selected {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
+    font-weight: 500;
+  }
+  .fruit-hint {
+    font-size: .65rem;
+    color: var(--gold);
+    margin-left: .9rem;
+    font-style: italic;
+  }
+  .fruit-hint.error { color: #c0392b; }
+
+  /* ── WHATSAPP CTA ── */
+  .cta {
+    margin-top: 1.4rem;
+    background: #25D366;
+    border-radius: 6px;
+    padding: .85rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    text-decoration: none;
+    transition: opacity .15s;
+  }
+  .cta:hover { opacity: .9; }
+
+  .cta-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+  }
+
+  .cta-text { flex: 1; }
+  .cta-label {
+    font-size: .62rem;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.8);
+    display: block;
+    margin-bottom: .1rem;
+  }
+  .cta-number {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: .04em;
+  }
+  .cta-arrow {
+    color: rgba(255,255,255,.7);
+    font-size: 1.2rem;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    font-size: .67rem;
+    color: var(--muted);
+    margin-top: 1.2rem;
+    line-height: 1.7;
+  }
+  .footer strong { color: var(--green); font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="c-bl"></div>
+  <div class="c-br"></div>
+
+  <!-- LOGO -->
+  <div class="logo-wrap">
+    <div class="logo-circle">
+      <svg class="ring" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="75" cy="75" r="70" stroke="#4A5E2F" stroke-width="1.8"/>
+        <circle cx="75" cy="75" r="65" stroke="#4A5E2F" stroke-width="1"/>
+        <path d="M22 52 A56 56 0 0 1 128 52" stroke="#4A5E2F" stroke-width="1.2" fill="none"/>
+        <path d="M18 103 A60 60 0 0 0 132 103" stroke="#4A5E2F" stroke-width="1.2" fill="none"/>
+      </svg>
+      <div class="logo-inner">
+        <svg width="26" height="24" viewBox="0 0 28 26" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:4px">
+          <path d="M5 5 Q6 1 8 1 Q9 3 7 5" stroke="#4A5E2F" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <path d="M11 5 Q12 1 14 1 Q15 3 13 5" stroke="#4A5E2F" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <rect x="3" y="7" width="18" height="11" rx="3" fill="#4A5E2F" opacity=".15"/>
+          <rect x="3" y="7" width="18" height="11" rx="3" stroke="#4A5E2F" stroke-width="1.4" fill="none"/>
+          <path d="M21 10 Q26 10 26 14 Q26 18 21 18" stroke="#4A5E2F" stroke-width="1.3" fill="none"/>
+          <line x1="1" y1="21" x2="23" y2="21" stroke="#4A5E2F" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <div class="logo-bfix">B-FIX</div>
+        <div class="logo-sub">The Breakfast<br>Solution</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"><span>✦</span></div>
+  <p class="eyebrow">Menú del día</p>
+
+  <!-- ITEM 1: CLÁSICO -->
+  <div class="item-box">
+    <div class="ribbon"></div>
+    <div class="item-header">
+      <div class="item-title-group">
+        <span class="item-tag">⭐ Estrella de la casa</span>
+        <div class="item-name">Croissant B-FIX</div>
+      </div>
+      <div class="item-price"><span class="peso">$</span>85</div>
+    </div>
+    <p class="item-desc">Huevo revuelto, jamón ahumado y queso cheddar fundido</p>
+    <div class="ingredients">
+      <span class="ing">🥚 Huevo</span>
+      <span class="ing">🥓 Jamón ahumado</span>
+      <span class="ing">🧀 Queso cheddar</span>
+    </div>
+  </div>
+
+  <!-- ITEM 2: FIT -->
+  <div class="item-box fit-card">
+    <div class="ribbon fit"></div>
+    <div class="item-header">
+      <div class="item-title-group">
+        <span class="item-tag fit">💪 Opción Fit</span>
+        <div class="item-name">Lean &amp; Clean</div>
+      </div>
+      <div class="item-price"><span class="peso">$</span>95</div>
+    </div>
+    <p class="item-desc">Claras de huevo, jamón ahumado y queso cheddar — mismo sabor, sin culpa</p>
+    <div class="ingredients">
+      <span class="ing">🥛 Claras de huevo</span>
+      <span class="ing">🥓 Jamón ahumado</span>
+      <span class="ing">🧀 Queso cheddar</span>
+    </div>
+  </div>
+
+  <!-- ITEM 3: OVERNIGHT OATS -->
+  <div class="item-box fit-card" style="margin-top:.9rem">
+    <div class="ribbon fit"></div>
+    <div class="item-header">
+      <div class="item-title-group">
+        <span class="item-tag fit">🌙 Overnight Oats</span>
+        <div class="item-name">Morning Jar</div>
+      </div>
+      <div class="item-price"><span class="peso">$</span>70</div>
+    </div>
+    <p class="item-desc">Preparadas desde la noche anterior para que lleguen perfectas a tu mañana</p>
+    <div class="ingredients">
+      <span class="ing">🌾 Avena entera</span>
+      <span class="ing">🥛 Leche deslactosada alta en proteína</span>
+      <span class="ing">🍶 Yogurt griego</span>
+      <span class="ing">🌱 Chía</span>
+      <span class="ing">🥜 Crema de cacahuate</span>
+    </div>
+    <div style="margin-top:.8rem">
+      <span class="fruit-label">🍓 Elige 2 frutas</span>
+      <div class="fruits">
+        <button class="fruit-btn" data-fruit="blueberries" onclick="toggleFruit(this)">🫐 Blueberries</button>
+        <button class="fruit-btn" data-fruit="fresa" onclick="toggleFruit(this)">🍓 Fresa</button>
+        <button class="fruit-btn" data-fruit="mango" onclick="toggleFruit(this)">🥭 Mango</button>
+        <button class="fruit-btn" data-fruit="platano" onclick="toggleFruit(this)">🍌 Plátano</button>
+      </div>
+      <span class="fruit-hint" id="fruitHint"></span>
+    </div>
+  </div>
+
+  <!-- WHATSAPP CTA -->
+  <a class="cta" href="https://wa.me/528443547904?text=Hola!%20Quiero%20pedir%20un%20croissant%20B-FIX%20%F0%9F%A5%90" target="_blank" id="ctaLink">
+    <svg class="cta-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="18" fill="rgba(255,255,255,0.2)"/>
+      <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M18 7C11.925 7 7 11.925 7 18c0 1.993.538 3.86 1.476 5.465L7 29l5.703-1.455A10.955 10.955 0 0 0 18 29c6.075 0 11-4.925 11-11S24.075 7 18 7Zm-3.593 6.78c-.22-.491-.452-.5-.661-.509L13.178 14c-.22 0-.56.083-.853.413-.293.33-1.12 1.093-1.12 2.665 0 1.573 1.147 3.093 1.306 3.306.16.213 2.2 3.573 5.44 4.867 2.693 1.06 3.24.849 3.827.796.586-.053 1.893-.774 2.16-1.52.266-.747.266-1.387.186-1.52-.08-.133-.293-.213-.613-.373-.32-.16-1.893-.934-2.186-1.04-.293-.106-.507-.16-.72.16-.213.32-.826 1.04-.999 1.253-.173.213-.347.24-.667.08-.32-.16-1.35-.498-2.573-1.587-.951-.848-1.593-1.895-1.78-2.215-.186-.32-.019-.493.14-.652.144-.143.32-.373.48-.56.16-.186.213-.32.32-.533.106-.213.053-.4-.027-.56-.08-.16-.7-1.74-.96-2.4Z"
+        fill="white"/>
+    </svg>
+    <div class="cta-text">
+      <span class="cta-label">Pide por WhatsApp</span>
+      <span class="cta-number">844 354 7904</span>
+    </div>
+    <span class="cta-arrow">→</span>
+  </a>
+
+  <p class="footer">
+    <strong>Freshly made with love · Lunes a Sábado</strong><br>
+    Pregunta disponibilidad · Ingredientes frescos cada día
+  </p>
+</div>
+<script>
+  function toggleFruit(btn) {
+    const allBtns = document.querySelectorAll('.fruit-btn');
+    const hint = document.getElementById('fruitHint');
+    const selected = document.querySelectorAll('.fruit-btn.selected');
+
+    if (btn.classList.contains('selected')) {
+      btn.classList.remove('selected');
+    } else {
+      if (selected.length >= 2) {
+        hint.textContent = '¡Solo puedes elegir 2 frutas!';
+        hint.className = 'fruit-hint error';
+        return;
+      }
+      btn.classList.add('selected');
+    }
+
+    const now = document.querySelectorAll('.fruit-btn.selected');
+    if (now.length === 2) {
+      hint.textContent = '¡Perfecto! 🎉';
+      hint.className = 'fruit-hint';
+    } else if (now.length === 1) {
+      hint.textContent = 'Elige 1 fruta más';
+      hint.className = 'fruit-hint';
+    } else {
+      hint.textContent = '';
+    }
+  }
+</script>
+</body>
+</html>
